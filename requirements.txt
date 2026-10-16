@@ -1,12 +1,13 @@
-flask
 pymongo
 mssql-python
 python-dotenv
+flask
+flask-login
 reportlab
 gunicorn
-flask-login
 pytest
 typing
 pydantic
 bcrypt
 fastapi
+jsonschema
