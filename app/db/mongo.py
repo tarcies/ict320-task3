@@ -4,7 +4,7 @@ from app.config import Config
 _client = None
 
 
-def get_db():
+def get_mongo():
     global _client
     if _client is None:
         try:
@@ -22,12 +22,12 @@ def get_db():
 
 
 def surveys():
-    return get_db()["surveys"]
+    return get_mongo()["surveys"]
 
 
 def equipment():
-    return get_db()["equipment"]
+    return get_mongo()["equipment"]
 
 
 def partners():
-    return get_db()["partners"]
+    return get_mongo()["partners"]
