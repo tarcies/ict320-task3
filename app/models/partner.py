@@ -1,9 +1,11 @@
 schema = {
     "type": "object",
     "properties": {
-        "id": {"type": "string"},
         "organisationName": {"type": "string"},
-        "region": {"type": "string", "maxLength": 3},
+        "region": {
+            "type": "string",
+            "enum": ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "ACT", "NT", "Other"],
+        },
         "contact": {
             "type": "object",
             "properties": {

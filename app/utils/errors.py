@@ -10,6 +10,9 @@ class DuplicateSummary(Exception): ...
 class ValidationError(Exception): ...
 
 
+class NoSurveysForDate(Exception): ...
+
+
 def register_error_handlers(app):
     @app.errorhandler(InsufficientStock)
     def _stock(e):

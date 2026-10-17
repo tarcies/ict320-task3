@@ -1,7 +1,6 @@
 schema = {
     "type": "object",
     "properties": {
-        "id": {"type": "string"},
         "surveyDate": {"type": "string", "format": "date"},
         "stationId": {"type": "string", "minLength": 1},
         "site": {"type": "string", "minLength": 1},
