@@ -1,0 +1,1085 @@
+{
+  "equipment": [
+    {
+      "_id": "eq-01",
+      "name": "Underwater Camera",
+      "category": "Imaging",
+      "replacementCost": 1800.0,
+      "availableQuantity": 7,
+      "lowStockThreshold": 2
+    },
+    {
+      "_id": "eq-02",
+      "name": "Dive Torch",
+      "category": "Lighting",
+      "replacementCost": 220.0,
+      "availableQuantity": 8,
+      "lowStockThreshold": 3
+    },
+    {
+      "_id": "eq-03",
+      "name": "Transect Tape 50m",
+      "category": "Measurement",
+      "replacementCost": 45.0,
+      "availableQuantity": 9,
+      "lowStockThreshold": 4
+    },
+    {
+      "_id": "eq-04",
+      "name": "Quadrat Frame 1m",
+      "category": "Measurement",
+      "replacementCost": 60.0,
+      "availableQuantity": 8,
+      "lowStockThreshold": 3
+    },
+    {
+      "_id": "eq-05",
+      "name": "Water Quality Probe",
+      "category": "Sensors",
+      "replacementCost": 950.0,
+      "availableQuantity": 1,
+      "lowStockThreshold": 2
+    },
+    {
+      "_id": "eq-06",
+      "name": "Dive Slate and Pencils",
+      "category": "Recording",
+      "replacementCost": 18.0,
+      "availableQuantity": 11,
+      "lowStockThreshold": 6
+    },
+    {
+      "_id": "eq-07",
+      "name": "GPS Buoy Marker",
+      "category": "Navigation",
+      "replacementCost": 130.0,
+      "availableQuantity": 7,
+      "lowStockThreshold": 2
+    },
+    {
+      "_id": "eq-08",
+      "name": "Sample Bags (pack of 10)",
+      "category": "Consumables",
+      "replacementCost": 12.0,
+      "availableQuantity": 8,
+      "lowStockThreshold": 10
+    },
+    {
+      "_id": "eq-09",
+      "name": "Snorkel Set",
+      "category": "Diving",
+      "replacementCost": 85.0,
+      "availableQuantity": 9,
+      "lowStockThreshold": 4
+    },
+    {
+      "_id": "eq-10",
+      "name": "Secchi Disk",
+      "category": "Sensors",
+      "replacementCost": 75.0,
+      "availableQuantity": 7,
+      "lowStockThreshold": 2
+    },
+    {
+      "_id": "eq-11",
+      "name": "Hydrophone",
+      "category": "Sensors",
+      "replacementCost": 1350.0,
+      "availableQuantity": 6,
+      "lowStockThreshold": 1
+    },
+    {
+      "_id": "eq-12",
+      "name": "Tablet Housing",
+      "category": "Imaging",
+      "replacementCost": 320.0,
+      "availableQuantity": 2,
+      "lowStockThreshold": 2
+    }
+  ],
+  "partners": [
+    {
+      "_id": "po-01",
+      "organisationName": "Outer Reef Trust",
+      "region": "QLD",
+      "contact": {
+        "name": "Sam Lee",
+        "email": "sam.lee@outerreeftrust.example.org",
+        "phone": "0400 000 101"
+      },
+      "conservationAreas": [
+        "Outer Reef",
+        "Coral Nursery Zone"
+      ]
+    },
+    {
+      "_id": "po-02",
+      "organisationName": "Mangrove Nursery Alliance",
+      "region": "QLD",
+      "contact": {
+        "name": "Ana Torres",
+        "email": "ana.torres@mangrovealliance.example.org",
+        "phone": "07 3000 0102"
+      },
+      "conservationAreas": [
+        "Mangrove Channel",
+        "Estuary Restoration"
+      ]
+    },
+    {
+      "_id": "po-03",
+      "organisationName": "Coral Sea Stewards",
+      "region": "NSW",
+      "contact": {
+        "name": "Ben Walsh",
+        "email": "ben.walsh@coralseastewards.example.org",
+        "phone": "0400 000 103"
+      },
+      "conservationAreas": [
+        "Coral Garden",
+        "Deep Reef Monitoring"
+      ]
+    },
+    {
+      "_id": "po-04",
+      "organisationName": "Tidepool Education Network",
+      "region": "NT",
+      "contact": {
+        "name": "Grace Yoon",
+        "email": "grace.yoon@tidepoolnetwork.example.org",
+        "phone": "08 9000 0104"
+      },
+      "conservationAreas": [
+        "Community Education",
+        "Shoreline Clean-up"
+      ]
+    },
+    {
+      "_id": "po-05",
+      "organisationName": "Reef Sentinel Volunteers",
+      "region": "WA",
+      "contact": {
+        "name": "Omar Reid",
+        "email": "omar.reid@reefsentinel.example.org",
+        "phone": "0400 000 105"
+      },
+      "conservationAreas": [
+        "Turtle Bay",
+        "Seagrass Meadow"
+      ]
+    }
+  ],
+  "surveys": [
+    {
+      "_id": "sv-20261006-001",
+      "surveyDate": "2026-10-06",
+      "stationId": "STN-01",
+      "site": "Outer Reef Drop-off",
+      "researcher": {
+        "id": "r-101",
+        "name": "Dr Mia Chen",
+        "email": "mia.chen@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Butterflyfish",
+          "count": 18
+        },
+        {
+          "name": "Moorish Idol",
+          "count": 10
+        },
+        {
+          "name": "Parrotfish",
+          "count": 15
+        },
+        {
+          "name": "Green Sea Turtle",
+          "count": 3
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-05",
+          "name": "Water Quality Probe",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 675.0,
+      "createdAt": "2026-10-06T10:45:00Z"
+    },
+    {
+      "_id": "sv-20261006-002",
+      "surveyDate": "2026-10-06",
+      "stationId": "STN-01",
+      "site": "North Reef Transect A",
+      "researcher": {
+        "id": "r-102",
+        "name": "Tom Okafor",
+        "email": "tom.okafor@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 8
+        },
+        {
+          "name": "Humphead Wrasse",
+          "count": 14
+        },
+        {
+          "name": "Reef Octopus",
+          "count": 9
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 4
+        }
+      ],
+      "totalCost": 872.5,
+      "createdAt": "2026-10-06T12:30:00Z"
+    },
+    {
+      "_id": "sv-20261006-003",
+      "surveyDate": "2026-10-06",
+      "stationId": "STN-01",
+      "site": "Coral Garden Plot 3",
+      "researcher": {
+        "id": "r-103",
+        "name": "Priya Nair",
+        "email": "priya.nair@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Hawksbill Turtle",
+          "count": 18
+        },
+        {
+          "name": "Clownfish",
+          "count": 15
+        },
+        {
+          "name": "Parrotfish",
+          "count": 4
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 3
+        },
+        {
+          "equipmentId": "eq-07",
+          "name": "GPS Buoy Marker",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 655.0,
+      "createdAt": "2026-10-06T14:15:00Z"
+    },
+    {
+      "_id": "sv-20261007-001",
+      "surveyDate": "2026-10-07",
+      "stationId": "STN-01",
+      "site": "Turtle Bay Seagrass Meadow",
+      "researcher": {
+        "id": "r-104",
+        "name": "Jack Morrison",
+        "email": "jack.morrison@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Moorish Idol",
+          "count": 7
+        },
+        {
+          "name": "Manta Ray",
+          "count": 11
+        },
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 17
+        },
+        {
+          "name": "Parrotfish",
+          "count": 11
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 5
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-10",
+          "name": "Secchi Disk",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 472.5,
+      "createdAt": "2026-10-07T10:15:00Z"
+    },
+    {
+      "_id": "sv-20261007-002",
+      "surveyDate": "2026-10-07",
+      "stationId": "STN-01",
+      "site": "Mangrove Channel Edge",
+      "researcher": {
+        "id": "r-105",
+        "name": "Leila Haddad",
+        "email": "leila.haddad@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Parrotfish",
+          "count": 8
+        },
+        {
+          "name": "Hawksbill Turtle",
+          "count": 15
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 5
+        },
+        {
+          "name": "Giant Clam",
+          "count": 12
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-01",
+          "name": "Underwater Camera",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-10",
+          "name": "Secchi Disk",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 627.5,
+      "createdAt": "2026-10-07T12:30:00Z"
+    },
+    {
+      "_id": "sv-20261008-001",
+      "surveyDate": "2026-10-08",
+      "stationId": "STN-01",
+      "site": "Coral Garden Plot 3",
+      "researcher": {
+        "id": "r-101",
+        "name": "Dr Mia Chen",
+        "email": "mia.chen@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Humphead Wrasse",
+          "count": 17
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 15
+        },
+        {
+          "name": "Giant Clam",
+          "count": 12
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-07",
+          "name": "GPS Buoy Marker",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-11",
+          "name": "Hydrophone",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-10",
+          "name": "Secchi Disk",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 697.5,
+      "createdAt": "2026-10-08T10:15:00Z"
+    },
+    {
+      "_id": "sv-20261008-002",
+      "surveyDate": "2026-10-08",
+      "stationId": "STN-01",
+      "site": "Outer Reef Drop-off",
+      "researcher": {
+        "id": "r-102",
+        "name": "Tom Okafor",
+        "email": "tom.okafor@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 17
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 8
+        },
+        {
+          "name": "Moorish Idol",
+          "count": 8
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-10",
+          "name": "Secchi Disk",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-02",
+          "name": "Dive Torch",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 542.5,
+      "createdAt": "2026-10-08T12:15:00Z"
+    },
+    {
+      "_id": "sv-20261008-003",
+      "surveyDate": "2026-10-08",
+      "stationId": "STN-01",
+      "site": "Outer Reef Drop-off",
+      "researcher": {
+        "id": "r-103",
+        "name": "Priya Nair",
+        "email": "priya.nair@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Manta Ray",
+          "count": 2
+        },
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 12
+        },
+        {
+          "name": "Parrotfish",
+          "count": 18
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-07",
+          "name": "GPS Buoy Marker",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 4
+        }
+      ],
+      "totalCost": 352.5,
+      "createdAt": "2026-10-08T14:15:00Z"
+    },
+    {
+      "_id": "sv-20261009-001",
+      "surveyDate": "2026-10-09",
+      "stationId": "STN-01",
+      "site": "Coral Garden Plot 3",
+      "researcher": {
+        "id": "r-104",
+        "name": "Jack Morrison",
+        "email": "jack.morrison@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Green Sea Turtle",
+          "count": 9
+        },
+        {
+          "name": "Reef Octopus",
+          "count": 8
+        },
+        {
+          "name": "Parrotfish",
+          "count": 5
+        },
+        {
+          "name": "Clownfish",
+          "count": 6
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 4
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 227.5,
+      "createdAt": "2026-10-09T10:30:00Z"
+    },
+    {
+      "_id": "sv-20261009-002",
+      "surveyDate": "2026-10-09",
+      "stationId": "STN-01",
+      "site": "North Reef Transect A",
+      "researcher": {
+        "id": "r-105",
+        "name": "Leila Haddad",
+        "email": "leila.haddad@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Clownfish",
+          "count": 16
+        },
+        {
+          "name": "Green Sea Turtle",
+          "count": 4
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 8
+        },
+        {
+          "name": "Moorish Idol",
+          "count": 13
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-02",
+          "name": "Dive Torch",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 720.0,
+      "createdAt": "2026-10-09T12:45:00Z"
+    },
+    {
+      "_id": "sv-20261010-001",
+      "surveyDate": "2026-10-10",
+      "stationId": "STN-01",
+      "site": "Mangrove Channel Edge",
+      "researcher": {
+        "id": "r-101",
+        "name": "Dr Mia Chen",
+        "email": "mia.chen@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Reef Octopus",
+          "count": 3
+        },
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 9
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 8
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 3
+        },
+        {
+          "equipmentId": "eq-01",
+          "name": "Underwater Camera",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 440.0,
+      "createdAt": "2026-10-10T10:45:00Z"
+    },
+    {
+      "_id": "sv-20261010-002",
+      "surveyDate": "2026-10-10",
+      "stationId": "STN-01",
+      "site": "North Reef Transect B",
+      "researcher": {
+        "id": "r-102",
+        "name": "Tom Okafor",
+        "email": "tom.okafor@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Hawksbill Turtle",
+          "count": 9
+        },
+        {
+          "name": "Giant Clam",
+          "count": 8
+        },
+        {
+          "name": "Parrotfish",
+          "count": 4
+        },
+        {
+          "name": "Clownfish",
+          "count": 11
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-12",
+          "name": "Tablet Housing",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 3
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-01",
+          "name": "Underwater Camera",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 4
+        }
+      ],
+      "totalCost": 300.0,
+      "createdAt": "2026-10-10T12:45:00Z"
+    },
+    {
+      "_id": "sv-20261010-003",
+      "surveyDate": "2026-10-10",
+      "stationId": "STN-01",
+      "site": "Outer Reef Drop-off",
+      "researcher": {
+        "id": "r-103",
+        "name": "Priya Nair",
+        "email": "priya.nair@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 6
+        },
+        {
+          "name": "Green Sea Turtle",
+          "count": 5
+        },
+        {
+          "name": "Clownfish",
+          "count": 5
+        },
+        {
+          "name": "Parrotfish",
+          "count": 13
+        },
+        {
+          "name": "Humphead Wrasse",
+          "count": 9
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 757.5,
+      "createdAt": "2026-10-10T14:00:00Z"
+    },
+    {
+      "_id": "sv-20261012-001",
+      "surveyDate": "2026-10-12",
+      "stationId": "STN-01",
+      "site": "North Reef Transect B",
+      "researcher": {
+        "id": "r-104",
+        "name": "Jack Morrison",
+        "email": "jack.morrison@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Clownfish",
+          "count": 11
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 6
+        },
+        {
+          "name": "Hawksbill Turtle",
+          "count": 9
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 4
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 727.5,
+      "createdAt": "2026-10-12T10:15:00Z"
+    },
+    {
+      "_id": "sv-20261012-002",
+      "surveyDate": "2026-10-12",
+      "stationId": "STN-01",
+      "site": "North Reef Transect B",
+      "researcher": {
+        "id": "r-105",
+        "name": "Leila Haddad",
+        "email": "leila.haddad@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Butterflyfish",
+          "count": 17
+        },
+        {
+          "name": "Parrotfish",
+          "count": 18
+        },
+        {
+          "name": "Reef Octopus",
+          "count": 12
+        },
+        {
+          "name": "Blacktip Reef Shark",
+          "count": 6
+        },
+        {
+          "name": "Clownfish",
+          "count": 8
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-08",
+          "name": "Sample Bags (pack of 10)",
+          "quantity": 3
+        },
+        {
+          "equipmentId": "eq-01",
+          "name": "Underwater Camera",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 910.0,
+      "createdAt": "2026-10-12T12:30:00Z"
+    },
+    {
+      "_id": "sv-20261014-001",
+      "surveyDate": "2026-10-14",
+      "stationId": "STN-01",
+      "site": "Outer Reef Drop-off",
+      "researcher": {
+        "id": "r-101",
+        "name": "Dr Mia Chen",
+        "email": "mia.chen@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Reef Octopus",
+          "count": 13
+        },
+        {
+          "name": "Clownfish",
+          "count": 18
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 17
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 3
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        }
+      ],
+      "totalCost": 542.5,
+      "createdAt": "2026-10-14T10:00:00Z"
+    },
+    {
+      "_id": "sv-20261014-002",
+      "surveyDate": "2026-10-14",
+      "stationId": "STN-01",
+      "site": "Coral Garden Plot 3",
+      "researcher": {
+        "id": "r-102",
+        "name": "Tom Okafor",
+        "email": "tom.okafor@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Clownfish",
+          "count": 7
+        },
+        {
+          "name": "Moorish Idol",
+          "count": 8
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-05",
+          "name": "Water Quality Probe",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-10",
+          "name": "Secchi Disk",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-02",
+          "name": "Dive Torch",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 887.5,
+      "createdAt": "2026-10-14T12:15:00Z"
+    },
+    {
+      "_id": "sv-20261014-003",
+      "surveyDate": "2026-10-14",
+      "stationId": "STN-01",
+      "site": "North Reef Transect B",
+      "researcher": {
+        "id": "r-103",
+        "name": "Priya Nair",
+        "email": "priya.nair@reefwatch.example.org"
+      },
+      "species": [
+        {
+          "name": "Moorish Idol",
+          "count": 15
+        },
+        {
+          "name": "Humphead Wrasse",
+          "count": 13
+        },
+        {
+          "name": "Butterflyfish",
+          "count": 12
+        },
+        {
+          "name": "Clownfish",
+          "count": 6
+        }
+      ],
+      "equipmentUsed": [
+        {
+          "equipmentId": "eq-03",
+          "name": "Transect Tape 50m",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-09",
+          "name": "Snorkel Set",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-06",
+          "name": "Dive Slate and Pencils",
+          "quantity": 2
+        },
+        {
+          "equipmentId": "eq-07",
+          "name": "GPS Buoy Marker",
+          "quantity": 1
+        },
+        {
+          "equipmentId": "eq-04",
+          "name": "Quadrat Frame 1m",
+          "quantity": 2
+        }
+      ],
+      "totalCost": 377.5,
+      "createdAt": "2026-10-14T14:45:00Z"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 from . import sql
 from . import mongo
 from json import loads as json_loads
+from time import sleep
 
 
 def _read_file(path):
@@ -29,14 +30,17 @@ def load_mongo(path):
     if surveys:
         for survey in surveys:
             print(f"MONGODB > Inserting survey for: {survey["surveyDate"]}")
+            sleep(0.5)
             mongo.surveys().insert_one(survey)
 
     if equipment:
         for equip in equipment:
             print(f"MONGODB > Inserting equipment: {equip["name"]}")
+            sleep(0.5)
             mongo.equipment().insert_one(equip)
 
     if partners:
         for partner in partners:
             print(f"MONGODB > Inserting partner: {partner["organisationName"]}")
+            sleep(0.5)
             mongo.partners().insert_one(partner)
