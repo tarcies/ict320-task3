@@ -1,39 +1,66 @@
 from app.db.mongo import equipment as mongo_equipment
 from app.models import validate_equipment
 from app.utils.errors import InsufficientStock
+from app.utils.ids import new_id
 
 
 def add_equipment(form):
+    doc = {**validate_equipment(form), "_id": new_id("eq")}
+    mongo_equipment().insert_one(doc)
+    return doc["_id"]
+
+
+def update_equipment(form):
     validate_equipment(form)
-    mongo_equipment().insert_one(form)
+    mongo_equipment().replace_one({"_id": form["_id"]}, form)
 
 
-def _update_stock(equipment_id: str, change: int):
-    filter_by = {"id": equipment_id}
-    projection = {"_id": 0, "availableQuantity": 1, "lowStockThreshold": 1}
-
-    res = mongo_equipment().find(filter=filter_by, projection=projection)[0]
-
-    new_qty = int(res["availableQuantity"]) + change
-    low_stock_threshold = int(res["lowStockThreshold"])
-
-    if new_qty < 0:
-        raise InsufficientStock
-
-    if new_qty <= low_stock_threshold:
-        print(f"Low stock alert on equipment {equipment_id}")
-
-    update = {"$inc": {"availableQuantity": change}}
-    mongo_equipment().find_one_and_update(filter_by, update)
+def delete_equipment(equipment_id: str):
+    mongo_equipment().delete_one({"_id": equipment_id})
 
 
-def increment(equipment_id: str, qty: int):
-    _update_stock(equipment_id, qty)
+def decrement(equipment_id, qty):
+    res = mongo_equipment().update_one(
+        {"_id": equipment_id, "availableQuantity": {"$gte": qty}},
+        {"$inc": {"availableQuantity": -qty}},
+    )
+    if res.matched_count == 0:
+        raise InsufficientStock(equipment_id)
 
 
-def decrement(equipment_id: str, qty: int):
-    _update_stock(equipment_id, -qty)
+def increment(equipment_id, qty):
+    mongo_equipment().update_one(
+        {"_id": equipment_id}, {"$inc": {"availableQuantity": qty}}
+    )
 
 
-def get_low_stock():
-    pass
+def get_low_quantity():
+    res = mongo_equipment().find(
+        {"$expr": {"$lte": ["$availableQuantity", "$lowStockThreshold"]}},
+        projection={"_id": 0, "name": 1, "availableQuantity": 1},
+    )
+    low_equipment = []
+    for item in res:
+        low_equipment.append(item)
+
+    return low_equipment
+
+
+def get_all_equipment(filter=None):
+    return list(mongo_equipment().find(filter or {}))
+
+
+def get_equipment(equipment_id):
+    return mongo_equipment().find_one({"_id": equipment_id})  # None if missing
+
+
+# # print(get_all_equipment())  # returns all equipment as array
+# print(
+#     get_equipment_by({"category": "Imaging"})
+# )  # returns array of equipment from category "Imaging"
+# print(
+#     get_equipment_by({"$expr": {"$lte": ["$availableQuantity", "$lowStockThreshold"]}})
+# )  # returns array of low stock equipment
+# print(get_equipment_by({"test": "example"}))  # returns 0
+# print(get_equipment("eq-05"))  # returns object of "Water Quality Probe"
+# print(get_equipment("eq-123"))  # returns 0
