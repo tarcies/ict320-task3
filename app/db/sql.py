@@ -17,3 +17,14 @@ def get_sql():
         raise
     finally:
         conn.close()
+
+
+def sql_select(query):
+    with get_sql() as conn:
+        cursor = conn.cursor()
+        cursor.execute(query)
+        columns = [col[0] for col in cursor.description]
+        fetch = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        if len(fetch) == 1:
+            fetch = fetch[0]
+        return fetch
