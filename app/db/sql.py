@@ -1,14 +1,26 @@
+import time
 from contextlib import contextmanager
-from mssql_python import connect
+from mssql_python import connect, OperationalError
 from app.config import Config
+
+
+def _connect(max_wait=120, delay=5):
+    deadline = time.monotonic() + max_wait
+    while True:
+        try:
+            return connect(Config.SQL_CONNECTION_STRING)
+        except OperationalError as e:
+            if time.monotonic() >= deadline:
+                raise ConnectionError(
+                    f"Azure SQL did not respond within {max_wait}s: {e}"
+                ) from e
+            print("Waiting for the database to resume...")
+            time.sleep(delay)
 
 
 @contextmanager
 def get_sql():
-    conn_str = f"Server={Config.SQL_SERVER};Database={Config.SQL_DATABASE};UID={Config.SQL_USER};PWD={Config.SQL_PASSWORD};Encrypt=yes;TrustServerCertificate=no;"
-
-    conn = connect(conn_str)
-
+    conn = _connect()
     try:
         yield conn
         conn.commit()

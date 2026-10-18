@@ -17,6 +17,8 @@ def load_sql(path):
     sql_script = _read_file(path)
     with sql.get_sql() as conn:
         cursor = conn.cursor()
+        print("MSSQL > Running SQL commands:")
+        print(sql_script)
         cursor.execute(sql_script)
 
 
@@ -30,17 +32,17 @@ def load_mongo(path):
     if surveys:
         for survey in surveys:
             print(f"MONGODB > Inserting survey for: {survey["surveyDate"]}")
-            sleep(0.5)
+            sleep(0.2)  # Artificial delay to stay below Azure's 1,000 RU/s free tier
             mongo.surveys().insert_one(survey)
 
     if equipment:
         for equip in equipment:
             print(f"MONGODB > Inserting equipment: {equip["name"]}")
-            sleep(0.5)
+            sleep(0.2)
             mongo.equipment().insert_one(equip)
 
     if partners:
         for partner in partners:
             print(f"MONGODB > Inserting partner: {partner["organisationName"]}")
-            sleep(0.5)
+            sleep(0.2)
             mongo.partners().insert_one(partner)
