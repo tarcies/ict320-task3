@@ -6,6 +6,7 @@ from app.services import (
     survey_service,
     equipment_service,
     partner_service,
+    auth_service,
 )
 
 OPTIONS = {
@@ -15,6 +16,7 @@ OPTIONS = {
     4: "4. Get surveys",
     5: "5. Get equipment",
     6: "6. Get partners",
+    7: "7. Create user",
 }
 
 
@@ -54,6 +56,11 @@ def run():
                     print(equipment_service.get_all_equipment())
                 case 6:
                     print(partner_service.get_all_partners())
+                case 7:
+                    username = input("> Username: ")
+                    password = input("> Password: ")
+                    role = input("> Role (field/admin): ")
+                    auth_service.create_user(username, password, role)
                 case _:
                     print(f"Unknown option {choice}")
         except ValueError:
