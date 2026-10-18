@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <div class="header">
+    <div class="header-title">
+      <p class="display">Login</p>
+    </div>
+  </div>
+  <div class="card" style="margin: var(--space-8) 0; width: 50%">
+    <form method="post">
+      <div class="input-group">
+        <label for="username" class="label input-label">Username</label>
+        <input
+          type="text"
+          id="username"
+          class="input"
+          name="username"
+          required
+        />
+      </div>
+      <div class="input-group">
+        <label for="password" class="label input-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="input"
+          name="password"
+          required
+        />
+      </div>
+      <input
+        type="submit"
+        value="Log In"
+        class="btn btn-primary motion-up-hover motion-down-active easing-base submit"
+      />
+      {% if msg %}
+      <p class="label auth" style="color: var(--danger)">{{ msg }}</p>
+      {% endif %}
+    </form>
+    <a href="./signup" style="text-align: center">New here? Sign up</a>
+  </div>
+</div>
+{% endblock %}

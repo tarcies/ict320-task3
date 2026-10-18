@@ -11,9 +11,9 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="{{ url_for('static', filename='css/style.css') }}"
     />
-    <title>{% block title %}TrailHire{% endblock %}</title>
+    <title>{% block title %}ReefWatch{% endblock %}</title>
   </head>
   <body>
     <div class="page">
@@ -21,32 +21,40 @@
       <p class="body" style="text-align: right; padding-right: var(--space-8)">
         Signed in as
         <span style="color: var(--accent); font-weight: 800">{{ user }}</span>
-        {% endif %}
       </p>
+      {% endif %}
       <nav class="navigation">
         <div class="header">
           <div class="header-title">
-            <p class="display">TrailHire</p>
+            <p class="display">ReefWatch</p>
           </div>
         </div>
-        <ul style="">
+        <ul>
           {% if user %}
           <!-- User pages -->
-          <li><a href="/catalogue">Catalogue</a></li>
-          <li><a href="/user/rentals">Rentals</a></li>
-          {% if is_admin %}
-          <!-- Admin pages -->
-          <li><a href="/admin/equipment" style="color: red">Equipment</a></li>
-          <li><a href="/admin/users" style="color: red">Users</a></li>
-          {% endif %}
-          <li><a href="/logout">Logout</a></li>
+          <li><a href="{{ url_for('main.index') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('surveys.list_surveys') }}">Surveys</a></li>
+          <li>
+            <a href="{{ url_for('equipment.list_equipment') }}">Equipment</a>
+          </li>
+          <li>
+            <a href="{{ url_for('summaries.list_summaries') }}">Summaries</a>
+          </li>
+          <li>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+          </li>
           {% else %}
-          <!-- Login/Signup only -->
-          <li><a href="/auth/login">Login</a></li>
-          <li><a href="/auth/signup">Sign Up</a></li>
+          <!-- Login only -->
+          <li><a href="{{ url_for('auth.login') }}">Login</a></li>
           {% endif %}
         </ul>
       </nav>
+
+      <!-- Messages flashed by the routes (success, danger, warning, info) -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% for
+      category, message in messages %}
+      <div class="flash flash-{{ category }}" role="alert">{{ message }}</div>
+      {% endfor %} {% endwith %}
 
       <!-- Page Content -->
       {% block content %}{% endblock %}
@@ -54,8 +62,7 @@
       <footer>
         <div class="footer">
           <div class="footer-logo">
-            <p class="display">TrailHire<span>.</span></p>
-            <span class="label">Outdoor Equipment Rental App</span>
+            <p class="display">ReefWatch<span>.</span></p>
           </div>
           <div class="footer-copyright">
             <p>© 2026 tarcies. All rights reserved.</p>
