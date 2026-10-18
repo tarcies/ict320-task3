@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %}Equipment · ReefWatch{% endblock %}
+{% block content %} {% set ns = namespace(low=0) %} {% for item in items %}{% if
+item.availableQuantity <= item.lowStockThreshold %}{% set ns.low = ns.low + 1
+%}{% endif %}{% endfor %}
+
+<div class="page-head">
+  <div>
+    <h1 class="h1">Equipment</h1>
+    <p class="label" style="margin-top: var(--space-2)">
+      {{ items|length }} items{% if ns.low %} · {{ ns.low }} low on stock{%
+      endif %}
+    </p>
+  </div>
+</div>
+
+{% if items %} {% for category, group in items | groupby("category") %}
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">{{ category }}</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="survey-grid" style="margin-top: var(--space-4)">
+    {% for item in group %} {% set is_out = item.availableQuantity <= 0 %} {%
+    set is_low = item.availableQuantity <= item.lowStockThreshold %}
+    <article
+      class="card survey-card equipment-card{% if is_low %} is-low{% endif %}"
+    >
+      <header class="survey-card-head">
+        <div>
+          <h3 class="h2">{{ item.name }}</h3>
+          <p class="label">{{ item['_id'] }}</p>
+        </div>
+        <p class="survey-cost">${{ "{:,.2f}".format(item.replacementCost) }}</p>
+      </header>
+      <div class="stock-row">
+        <span class="body">In stock:</span>
+        <span class="body stock-count">{{ item.availableQuantity }}</span>
+        {% if is_out %}<span class="badge badge-danger">Out of stock</span> {%
+        elif is_low %}<span class="badge badge-warning">Low stock</span>{% endif
+        %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %} {% else %}
+<div class="empty-state">
+  <p class="h2">No equipment found</p>
+</div>
+{% endif %} {% endblock %}
