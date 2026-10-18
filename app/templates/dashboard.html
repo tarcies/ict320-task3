@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <p class="h2">Low-Stock Equipment</p>
+  <div class="catalogue">
+    {% for item in low_stock %}
+    <div class="card">
+      <p class="h2">{{ item.name }}</p>
+      <p class="h2" style="color: red">Stock: {{ item.availableQuantity }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <p class="h2">Recent Surveys</p>
+  <div class="catalogue">
+    {% for item in recent_surveys %}
+    <div class="card">
+      <p class="body">{{ item }}</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <p class="h2">Recent Summaries</p>
+  <div class="catalogue">
+    {% for item in recent_summaries %}
+    <div class="card">
+      <p class="body">{{ item }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

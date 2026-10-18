@@ -70,3 +70,9 @@ def get_summary(date):
 
 def get_all_summaries():
     return sql_select("SELECT * FROM dbo.DailySummaries")
+
+
+def get_recent_summaries(count):
+    return sql_select(
+        f"SELECT TOP {count} * FROM dbo.DailySummaries ORDER BY SummaryDate DESC"
+    )

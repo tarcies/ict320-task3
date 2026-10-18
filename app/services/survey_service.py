@@ -17,7 +17,7 @@ def _insert_with_date_id(doc):
             n += 1  # Duplicate ID => increase n and try again
 
 
-def add_survey(form):
+def create_survey(form):
     doc = {**validate_survey(form), "createdAt": datetime.utc_now_iso()}
 
     reserved = []
@@ -37,6 +37,10 @@ def add_survey(form):
 
 def get_all_surveys(filter=None):
     return list(mongo_surveys().find(filter or {}))
+
+
+def get_recent_surveys(count):
+    return list(mongo_surveys().find(limit=count))
 
 
 def get_survey(survey_id):
