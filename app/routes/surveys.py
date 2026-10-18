@@ -81,7 +81,7 @@ def list_surveys():
     """List surveys, newest first; optionally filter with ?date=YYYY-MM-DD."""
     day = request.args.get("date", "").strip()
 
-    if day and not is_iso_date():
+    if day and not is_iso_date(day):
         flash("Date must be in YYYY-MM-DD format", "warning")
 
     surveys = (
@@ -100,7 +100,7 @@ def new_survey():
 
     if request.method == "POST":
         try:
-            survey_id = survey_service.add_survey(
+            survey_id = survey_service.create_survey(
                 _parse_survey_form(request.form, catalog)
             )
         except ValidationError as e:

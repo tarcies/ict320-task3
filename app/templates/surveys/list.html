@@ -1,0 +1,93 @@
+{% extends "base.html" %} {% block title %}Surveys · ReefWatch{% endblock %} {%
+block content %}
+<div class="page-head">
+  <div>
+    <h1 class="h1">Surveys</h1>
+    <p class="label" style="margin-top: var(--space-2)">
+      {% if day %}{{ surveys|length }} on {{ day }}{% else %}{{ surveys|length
+      }} recorded{% endif %}
+    </p>
+  </div>
+  <form method="get" class="filter-bar">
+    <div class="input-group">
+      <label class="input-label" for="date">Filter by date</label>
+      <input
+        class="input"
+        type="date"
+        id="date"
+        name="date"
+        value="{{ day }}"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" id="search">Search</button>
+    {% if day %}
+    <a class="btn btn-ghost" href="{{ url_for('surveys.list_surveys') }}"
+      >Clear</a
+    >
+    {% endif %}
+  </form>
+  <a class="btn btn-primary" href="{{ url_for('surveys.new_survey') }}"
+    >+ New survey</a
+  >
+</div>
+
+{% if surveys %}
+<div class="survey-grid">
+  {% for survey in surveys %}
+  <article class="card survey-card">
+    <header class="survey-card-head">
+      <div>
+        <h2 class="h2">
+          <a href="{{ url_for('surveys.detail', survey_id=survey['_id']) }}"
+            >{{ survey.surveyDate }}</a
+          >
+        </h2>
+        <p class="label">{{ survey['_id'] }}</p>
+      </div>
+      <p class="survey-cost h2" style="font-size: 20px; align-self: center">
+        ${{ "{:,.2f}".format(survey.totalCost) }}
+      </p>
+    </header>
+
+    <p class="survey-site">{{ survey.site }}</p>
+
+    <p class="label">Researcher</p>
+    <p class="body">
+      {{ survey.researcher.name }} {% if survey.researcher.email %}<br /><span
+        class="muted"
+        >{{ survey.researcher.email }}</span
+      >{% endif %}
+    </p>
+
+    <p class="label">Species</p>
+    <ul class="tally">
+      {% for s in survey.species %}
+      <li>
+        <span>{{ s.name }}</span><span class="tally-n">{{ s.count }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p class="label">Equipment used</p>
+    <ul class="tally">
+      {% for e in survey.equipmentUsed %}
+      <li>
+        <span>{{ e.name }}</span><span class="tally-n">×{{ e.quantity }}</span>
+      </li>
+      {% else %}
+      <li><span class="muted">None recorded</span></li>
+      {% endfor %}
+    </ul>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p class="h2">No surveys found</p>
+  <p class="body">
+    {% if day %}Nothing was recorded on {{ day }}.{% else %}No surveys have been
+    recorded yet.{% endif %}
+  </p>
+</div>
+{% endif %} {% endblock %}

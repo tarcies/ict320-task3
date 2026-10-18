@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}New survey · ReefWatch{% endblock %}
+
+{% block content %}
+{% macro species_row(name="", count="") %}
+<div class="repeat-row">
+  <input class="input" type="text" name="species_name" value="{{ name }}"
+         placeholder="Species, e.g. Clownfish" aria-label="Species name" required />
+  <input class="input" type="number" name="species_count" value="{{ count }}"
+         min="1" step="1" placeholder="Count" aria-label="Number observed" required />
+  <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove species row">✕</button>
+</div>
+{% endmacro %}
+
+{% macro equipment_row(selected="", qty="") %}
+<div class="repeat-row">
+  <select class="input" name="equipment_id" aria-label="Equipment">
+    <option value="">Select equipment…</option>
+    {% for item in equipment %}
+    <option value="{{ item['_id'] }}" data-available="{{ item['availableQuantity'] }}"
+            {% if item['_id'] == selected %}selected{% endif %}
+            {% if item['availableQuantity'] <= 0 and item['_id'] != selected %}disabled{% endif %}>
+      {{ item['name'] }} ({{ item['availableQuantity'] }} available)
+    </option>
+    {% endfor %}
+  </select>
+  <input class="input" type="number" name="equipment_qty" value="{{ qty }}"
+         min="1" step="1" placeholder="Qty" aria-label="Quantity used" />
+  <button type="button" class="btn btn-ghost btn-sm" data-remove aria-label="Remove equipment row">✕</button>
+</div>
+{% endmacro %}
+
+{% set sp_names = form.getlist("species_name") if form.getlist is defined else [] %}
+{% set sp_counts = form.getlist("species_count") if form.getlist is defined else [] %}
+{% set eq_ids = form.getlist("equipment_id") if form.getlist is defined else [] %}
+{% set eq_qtys = form.getlist("equipment_qty") if form.getlist is defined else [] %}
+
+<h1 class="h1" style="text-align: center">New survey</h1>
+<p class="label" style="margin-top: var(--space-2); text-align: center">
+  Equipment quantities update automatically when the survey is saved
+</p>
+
+<form id="survey-form" method="post" class="card" style="margin-top: var(--space-6)">
+
+  <section class="section" style="margin-top: 0">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Survey details</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="form-grid">
+      <div class="input-group">
+        <label class="input-label" for="surveyDate">Survey date</label>
+        <input class="input" type="date" id="surveyDate" name="surveyDate"
+               value="{{ form.get('surveyDate', '') }}" required />
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="site">Site</label>
+        <input class="input" type="text" id="site" name="site"
+               value="{{ form.get('site', '') }}" placeholder="e.g. North Reef Transect A" required />
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="totalCost">Total cost (AUD)</label>
+        <input class="input" type="number" id="totalCost" name="totalCost"
+               value="{{ form.get('totalCost', '') }}" min="0" step="0.01" placeholder="0.00" required />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Researcher</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="form-grid">
+      <div class="input-group">
+        <label class="input-label" for="researcher_name">Name</label>
+        <input class="input" type="text" id="researcher_name" name="researcher_name"
+               value="{{ form.get('researcher_name', '') }}" required />
+      </div>
+      <div class="input-group">
+        <label class="input-label" for="researcher_email">Email (optional)</label>
+        <input class="input" type="email" id="researcher_email" name="researcher_email"
+               value="{{ form.get('researcher_email', '') }}" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Species observed</h2>
+      <div class="divider"></div>
+    </div>
+    <div id="species-rows" class="repeat-rows">
+      {% for i in range([sp_names|length, 1]|max) %}
+        {{ species_row(sp_names[i] if i < sp_names|length else "",
+                       sp_counts[i] if i < sp_counts|length else "") }}
+      {% endfor %}
+    </div>
+    <button type="button" class="btn btn-outline btn-sm" data-add="species">+ Add species</button>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Equipment used</h2>
+      <div class="divider"></div>
+    </div>
+    <div id="equipment-rows" class="repeat-rows">
+      {% for i in range([eq_ids|length, 1]|max) %}
+        {{ equipment_row(eq_ids[i] if i < eq_ids|length else "",
+                         eq_qtys[i] if i < eq_qtys|length else "") }}
+      {% endfor %}
+    </div>
+    <button type="button" class="btn btn-outline btn-sm" data-add="equipment">+ Add equipment</button>
+  </section>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" id="save-survey">Save survey</button>
+    <a class="btn btn-ghost" href="{{ url_for('surveys.list_surveys') }}">Cancel</a>
+  </div>
+</form>
+
+<template id="species-template">{{ species_row() }}</template>
+<template id="equipment-template">{{ equipment_row() }}</template>
+<script src="{{ url_for('static', filename='js/survey_form.js') }}" defer></script>
+{% endblock %}
