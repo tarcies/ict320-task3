@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Partners · ReefWatch{% endblock %} {%
+block content %}
+
+<div class="page-head">
+  <div>
+    <h1 class="h1">Partners</h1>
+    <p class="label" style="margin-top: var(--space-2)">
+      {{ partners|length }} total
+    </p>
+  </div>
+</div>
+
+{% if partners %} {% for region, group in partners | groupby("region") %}
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">{{ region }}</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="survey-grid" style="margin-top: var(--space-4)">
+    {% for partner in group %}
+    <article class="card survey-card equipment-card">
+      <div>
+        <h3 class="h2">{{ partner.organisationName }}</h3>
+        <p class="label">{{ partner['_id'] }}</p>
+      </div>
+
+      <p class="label">Contact</p>
+      <p class="body">
+        {{ partner.contact.name }} {% if partner.contact.email %}<br />
+        <span class="muted">{{ partner.contact.email }}</span>
+        {% endif %} {% if partner.contact.phone %}<br />
+        <span class="muted">{{ partner.contact.phone }}</span>
+        {% endif %}
+      </p>
+
+      <p class="label">Conservation areas</p>
+      <ul class="tally">
+        {% for area in partner.conservationAreas %}
+        <li><span>{{ area }}</span></li>
+        {% else %}
+        <li><span class="muted">None listed</span></li>
+        {% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %} {% else %}
+<div class="empty-state">
+  <p class="h2">No equipment found</p>
+</div>
+{% endif %} {% endblock %}
