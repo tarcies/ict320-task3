@@ -27,6 +27,12 @@ def create_app():
 
     PUBLIC = {"auth.login", "auth.signup", "static"}
 
+    @app.errorhandler(403)
+    @app.errorhandler(404)
+    @app.errorhandler(500)
+    def http_error(e):
+        return render_template("error.html", error=e), e.code
+
     @app.before_request
     def require_login():
         if request.endpoint is None or request.endpoint in PUBLIC:

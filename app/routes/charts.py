@@ -5,18 +5,12 @@ bp = Blueprint("charts", __name__, url_prefix="/api/charts")
 
 
 @bp.route("/surveys-per-day")
-def list_items():
-    items = service.get_all_items()  # always a list
-    return render_template("items/list.html", items=items)
+def surveys(day): ...
 
 
 @bp.route("/species-total")
-def list_items():
-    items = service.get_all_items()  # always a list
-    return render_template("items/list.html", items=items)
+def species(): ...
 
 
 @bp.route("/cost-per-day")
-def list_items():
-    items = service.get_all_items()  # always a list
-    return render_template("items/list.html", items=items)
+def cost(day): ...
