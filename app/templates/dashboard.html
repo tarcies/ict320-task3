@@ -1,31 +1,117 @@
-{% extends "base.html" %} {% block content %}
-<div>
-  <p class="h2">Low-Stock Equipment</p>
-  <div class="catalogue">
-    {% for item in low_stock %}
-    <div class="card">
-      <p class="h2">{{ item.name }}</p>
-      <p class="h2" style="color: red">Stock: {{ item.availableQuantity }}</p>
-    </div>
-    {% endfor %}
+{% extends "base.html" %} {% block title %}Dashboard · ReefWatch{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1 class="h1">Dashboard</h1>
+    <p class="label" style="margin-top: var(--space-2)">Station overview</p>
   </div>
-
-  <p class="h2">Recent Surveys</p>
-  <div class="catalogue">
-    {% for item in recent_surveys %}
-    <div class="card">
-      <p class="body">{{ item }}</p>
-    </div>
-    {% endfor %}
-  </div>
-
-  <p class="h2">Recent Summaries</p>
-  <div class="catalogue">
-    {% for item in recent_summaries %}
-    <div class="card">
-      <p class="body">{{ item }}</p>
-    </div>
-    {% endfor %}
-  </div>
+  <a class="btn btn-primary" href="{{ url_for('surveys.new_survey') }}"
+    >+ New survey</a
+  >
 </div>
+
+<!-- Low stock -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Low stock</h2>
+    <div class="divider"></div>
+    <a href="{{ url_for('equipment.list_equipment') }}">All equipment →</a>
+  </div>
+  {% if low_stock %}
+  <div class="survey-grid" style="margin-top: var(--space-4)">
+    {% for item in low_stock | sort(attribute="availableQuantity") %} {% set
+    is_out = item.availableQuantity <= 0 %}
+    <article
+      class="card survey-card equipment-card {% if is_out %} is-out {% else %} is-low {% endif%}"
+    >
+      <header class="survey-card-head">
+        <div>
+          <h3 class="h2">{{ item.name }}</h3>
+          <p class="label">{{ item['_id'] }}</p>
+        </div>
+      </header>
+      <div class="stock-row">
+        <span class="label">In stock</span>
+        <span class="stock-count">{{ item.availableQuantity }}</span>
+        {% if is_out %}<span class="badge badge-danger">Out of stock</span> {%
+        else %}<span class="badge badge-warning">Low stock</span>{% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="body muted" style="margin-top: var(--space-4)">
+    All equipment is above its low-stock threshold.
+  </p>
+  {% endif %}
+</section>
+
+<!-- Recent surveys -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Recent surveys</h2>
+    <div class="divider"></div>
+    <a href="{{ url_for('surveys.list_surveys') }}">All surveys →</a>
+  </div>
+  {% if recent_surveys %}
+  <div class="card detail-card" style="margin-top: var(--space-4)">
+    <ul class="tally row-list">
+      {% for survey in recent_surveys %}
+      <li>
+        <span>
+          <a href="{{ url_for('surveys.detail', survey_id=survey['_id']) }}"
+            >{{ survey.surveyDate }}</a
+          >
+          <span class="muted"
+            >{{ survey.site }} · {{ survey.researcher.name }}</span
+          >
+        </span>
+        <span class="tally-n">${{ "{:,.2f}".format(survey.totalCost) }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <p class="h2">No surveys yet</p>
+    <p class="body">Record the first one with the button above.</p>
+  </div>
+  {% endif %}
+</section>
+
+<!-- Recent summaries -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Recent summaries</h2>
+    <div class="divider"></div>
+    <a href="{{ url_for('summaries.list_summaries') }}">All summaries →</a>
+  </div>
+  {% if recent_summaries %}
+  <div class="card detail-card" style="margin-top: var(--space-4)">
+    <ul class="tally row-list">
+      {% for s in recent_summaries | sort(attribute="SummaryDate", reverse=true)
+      %} {% set day = s.SummaryDate | string %}
+      <li>
+        <span>
+          <a href="{{ url_for('summaries.detail', day=day) }}">{{ day }}</a>
+          <span class="muted">
+            {{ s.TotalSurveys }} survey{{ "" if s.TotalSurveys == 1 else "s" }}
+            {% if s.TopSpecies %}· top: {{ s.TopSpecies }}{% endif %}
+          </span>
+        </span>
+        <span class="tally-n">${{ "{:,.2f}".format(s.TotalSurveyCost) }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <p class="h2">No summaries yet</p>
+    <p class="body">
+      {% if is_admin %}Generate one from the Summaries page.{% else %}An admin
+      can generate one for any day with surveys.{% endif %}
+    </p>
+  </div>
+  {% endif %}
+</section>
 {% endblock %}

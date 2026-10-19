@@ -20,7 +20,10 @@
       {% if user %}
       <p class="body" style="text-align: right; padding-right: var(--space-8)">
         Signed in as
-        <span style="color: var(--accent); font-weight: 800">{{ user }}</span>
+        <span style="color: var(--accent); font-weight: 800; margin-right: 2rem"
+          >{{ user }}</span
+        >
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
       </p>
       {% endif %}
       <nav class="navigation">
@@ -38,10 +41,10 @@
             <a href="{{ url_for('equipment.list_equipment') }}">Equipment</a>
           </li>
           <li>
-            <a href="{{ url_for('summaries.list_summaries') }}">Summaries</a>
+            <a href="{{ url_for('partners.list_partners') }}">Partners</a>
           </li>
           <li>
-            <a href="{{ url_for('auth.logout') }}">Logout</a>
+            <a href="{{ url_for('summaries.list_summaries') }}">Summaries</a>
           </li>
           {% else %}
           <!-- Login only -->
