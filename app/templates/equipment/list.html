@@ -24,7 +24,7 @@ item.availableQuantity <= item.lowStockThreshold %}{% set ns.low = ns.low + 1
     {% for item in group %} {% set is_out = item.availableQuantity <= 0 %} {%
     set is_low = item.availableQuantity <= item.lowStockThreshold %}
     <article
-      class="card survey-card equipment-card{% if is_low %} is-low{% endif %}"
+      class="card survey-card equipment-card{% if is_out %} is-out {% elif is_low %} is-low {% endif %}"
     >
       <header class="survey-card-head">
         <div>

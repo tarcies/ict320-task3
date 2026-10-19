@@ -21,11 +21,11 @@ def list_equipment():
 @role_required("admin")
 def add_equipment(form):
     equipment_service.add_equipment(form)
-    return redirect(url_for("partners"))
+    return redirect(url_for("equipment"))
 
 
 @bp.route("/remove", methods=["POST"])
 @role_required("admin")
 def remove_equipment(equipment_id):
     equipment_service.delete_equipment(equipment_id)
-    return redirect(url_for("partners"))
+    return redirect(url_for("equipment"))
