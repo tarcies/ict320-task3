@@ -36,11 +36,11 @@ def create_survey(form):
 
 
 def get_all_surveys(filter=None):
-    return list(mongo_surveys().find(filter or {}))
+    return list(mongo_surveys().find(filter or {}).sort({"surveyDate": -1}))
 
 
 def get_recent_surveys(count):
-    return list(mongo_surveys().find(limit=count))
+    return list(mongo_surveys().find(limit=count).sort({"surveyDate": -1}))
 
 
 def get_survey(survey_id):

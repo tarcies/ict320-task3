@@ -1,17 +1,23 @@
-{% extends "base.html" %}
-{% block title %}Survey {{ survey['_id'] }} · ReefWatch{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}Survey {{ survey['_id'] }} ·
+ReefWatch{% endblock %} {% block content %}
 <div class="page-head">
   <div>
     <h1 class="h1">{{ survey.surveyDate }}</h1>
     <p class="label" style="margin-top: var(--space-2)">{{ survey['_id'] }}</p>
   </div>
-  <a class="btn btn-ghost" href="{{ url_for('surveys.list_surveys') }}">← All surveys</a>
+  <div>
+    <a
+      class="btn btn-primary"
+      href="{{ url_for('surveys.pdf', survey_id=survey['_id']) }}"
+      >Download PDF</a
+    >
+    <a class="btn btn-ghost" href="{{ url_for('surveys.list_surveys') }}"
+      >← All surveys</a
+    >
+  </div>
 </div>
 
 <div class="card detail-card" style="margin-top: var(--space-6)">
-
   <section class="section" style="margin-top: 0">
     <div class="section-header">
       <span class="section-num">01</span>
@@ -19,10 +25,25 @@
       <div class="divider"></div>
     </div>
     <dl class="facts">
-      <div><dt class="label">Site</dt><dd>{{ survey.site }}</dd></div>
-      <div><dt class="label">Station</dt><dd>{{ survey.stationId or "—" }}</dd></div>
-      <div><dt class="label">Total cost</dt><dd class="survey-cost">${{ "{:,.2f}".format(survey.totalCost) }}</dd></div>
-      <div><dt class="label">Recorded</dt><dd>{{ survey.createdAt[:16].replace("T", " ") ~ " UTC" if survey.createdAt else "—" }}</dd></div>
+      <div>
+        <dt class="label">Site</dt>
+        <dd>{{ survey.site }}</dd>
+      </div>
+      <div>
+        <dt class="label">Station</dt>
+        <dd>{{ survey.stationId or "—" }}</dd>
+      </div>
+      <div>
+        <dt class="label">Total cost</dt>
+        <dd class="survey-cost">${{ "{:,.2f}".format(survey.totalCost) }}</dd>
+      </div>
+      <div>
+        <dt class="label">Recorded</dt>
+        <dd>
+          {{ survey.createdAt[:16].replace("T", " ") ~ " UTC" if
+          survey.createdAt else "—" }}
+        </dd>
+      </div>
     </dl>
   </section>
 
@@ -33,10 +54,18 @@
       <div class="divider"></div>
     </div>
     <dl class="facts">
-      <div><dt class="label">Name</dt><dd>{{ survey.researcher.name }}</dd></div>
+      <div>
+        <dt class="label">Name</dt>
+        <dd>{{ survey.researcher.name }}</dd>
+      </div>
       <div>
         <dt class="label">Email</dt>
-        <dd>{% if survey.researcher.email %}<a href="mailto:{{ survey.researcher.email }}">{{ survey.researcher.email }}</a>{% else %}—{% endif %}</dd>
+        <dd>
+          {% if survey.researcher.email %}<a
+            href="mailto:{{ survey.researcher.email }}"
+            >{{ survey.researcher.email }}</a
+          >{% else %}—{% endif %}
+        </dd>
       </div>
     </dl>
   </section>
@@ -49,9 +78,16 @@
     </div>
     <ul class="tally">
       {% for s in survey.species %}
-      <li><span>{{ s.name }}</span><span class="tally-n">{{ s.count }}</span></li>
+      <li>
+        <span>{{ s.name }}</span><span class="tally-n">{{ s.count }}</span>
+      </li>
       {% endfor %}
-      <li class="tally-total"><span>Total individuals</span><span class="tally-n">{{ survey.species|sum(attribute="count") }}</span></li>
+      <li class="tally-total">
+        <span>Total individuals</span
+        ><span class="tally-n"
+          >{{ survey.species|sum(attribute="count") }}</span
+        >
+      </li>
     </ul>
   </section>
 
@@ -63,7 +99,10 @@
     </div>
     <ul class="tally">
       {% for e in survey.equipmentUsed %}
-      <li><span>{{ e.name }} <span class="muted">{{ e.equipmentId }}</span></span><span class="tally-n">×{{ e.quantity }}</span></li>
+      <li>
+        <span>{{ e.name }} <span class="muted">{{ e.equipmentId }}</span></span
+        ><span class="tally-n">×{{ e.quantity }}</span>
+      </li>
       {% else %}
       <li><span class="muted">No equipment recorded</span></li>
       {% endfor %}
