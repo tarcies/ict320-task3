@@ -1,5 +1,4 @@
 from flask import Flask, request, session, redirect, url_for
-from app.config import Config
 from app.utils.errors import register_error_handlers
 from app.services import auth_service
 from app.routes import (
@@ -11,6 +10,15 @@ from app.routes import (
     charts,
     auth,
 )
+
+import os
+
+value = os.getenv("MONGO_CONNECTION_STRING")
+
+print("Mongo variable exists:", value is not None)
+print("Mongo variable is non-empty:", bool(value and value.strip()))
+
+from app.config import Config
 
 
 def create_app():
