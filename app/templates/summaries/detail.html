@@ -1,0 +1,89 @@
+{% extends "base.html" %} {% set day = summary.SummaryDate | string %} {% block
+title %}Summary {{ day }} · ReefWatch{% endblock %} {% block content %}
+<div class="page-head">
+  <div>
+    <h1 class="h1">{{ day }}</h1>
+    <p class="label" style="margin-top: var(--space-2)">Daily summary</p>
+  </div>
+  <a class="btn btn-ghost" href="{{ url_for('summaries.list_summaries') }}"
+    >← All summaries</a
+  >
+</div>
+
+<div class="card detail-card" style="margin-top: var(--space-6)">
+  <section class="section" style="margin-top: 0">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Totals</h2>
+      <div class="divider"></div>
+    </div>
+    <dl class="facts">
+      <div>
+        <dt class="label">Surveys</dt>
+        <dd class="survey-cost">{{ summary.TotalSurveys }}</dd>
+      </div>
+      <div>
+        <dt class="label">Total cost</dt>
+        <dd class="survey-cost">
+          ${{ "{:,.2f}".format(summary.TotalSurveyCost) }}
+        </dd>
+      </div>
+      <div>
+        <dt class="label">Top species</dt>
+        <dd class="survey-cost">
+          {% if summary.TopSpecies %}{{ summary.TopSpecies }}
+          <span class="muted">({{ summary.TopSpeciesCount }})</span>{% else
+          %}—{% endif %}
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Low stock alerts</h2>
+      <div class="divider"></div>
+    </div>
+    {% if summary.LowEquipmentAlerts %}
+    <ul class="tally">
+      {% for alert in summary.LowEquipmentAlerts.split(";") if alert.strip() %}
+      <li>
+        <span>{{ alert.strip() }}</span
+        ><span class="badge badge-warning">Low</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="body muted">No equipment was low on stock.</p>
+    {% endif %}
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Surveys on this day</h2>
+      <div class="divider"></div>
+    </div>
+    {% if surveys %}
+    <ul class="tally">
+      {% for sv in surveys %}
+      <li>
+        <span
+          ><a href="{{ url_for('surveys.detail', survey_id=sv['_id']) }}"
+            >{{ sv['_id'] }}</a
+          >
+          <span class="muted"
+            >{{ sv.site }} · {{ sv.researcher.name }}</span
+          ></span
+        >
+        <span class="tally-n">${{ "{:,.2f}".format(sv.totalCost) }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="body muted">No survey records found for this date.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

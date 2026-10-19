@@ -1,0 +1,77 @@
+{% extends "base.html" %} {% block title %}Summaries · ReefWatch{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1 class="h1">Daily summaries</h1>
+    <p class="label" style="margin-top: var(--space-2)">
+      {{ summaries|length }} total
+    </p>
+  </div>
+</div>
+
+{% if is_admin %}
+<form
+  method="post"
+  action="{{ url_for('summaries.generate') }}"
+  class="filter-bar"
+>
+  <div class="input-group">
+    <label class="input-label" for="date">Generate a summary for</label>
+    <input class="input" type="date" id="date" name="date" required />
+  </div>
+  <button type="submit" class="btn btn-primary">Generate</button>
+</form>
+{% endif %} {% if summaries %}
+<div class="survey-grid">
+  {% for s in summaries | sort(attribute="SummaryDate", reverse=true) %} {% set
+  day = s.SummaryDate | string %}
+  <article class="card survey-card">
+    <header class="survey-card-head">
+      <div>
+        <h2 class="h2">
+          <a href="{{ url_for('summaries.detail', day=day) }}">{{ day }}</a>
+        </h2>
+        <p class="label">
+          {{ s.TotalSurveys }} survey{{ "" if s.TotalSurveys == 1 else "s" }}
+        </p>
+      </div>
+      <p class="survey-cost">${{ "{:,.2f}".format(s.TotalSurveyCost) }}</p>
+    </header>
+
+    <p class="label">Top species</p>
+    <p class="body">
+      {% if s.TopSpecies %}{{ s.TopSpecies }}
+      <span class="muted">({{ s.TopSpeciesCount }} seen)</span>{% else %}—{%
+      endif %}
+    </p>
+
+    {% if s.LowEquipmentAlerts %}
+    <p class="badge badge-warning" style="justify-self: start">
+      {{ s.LowEquipmentAlerts.split(";") | length }} low stock alert{{ "" if
+      s.LowEquipmentAlerts.split(";") | length == 1 else "s" }}
+    </p>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <p class="h2">No summaries yet</p>
+  <p class="body">
+    {% if is_admin %}Pick a date above to generate the first one.{% else %}An
+    admin can generate one for any day with surveys.{% endif %}
+  </p>
+</div>
+{% endif %}
+
+<script>
+  // Default to today (browser's own timezone) and block future dates.
+  (function () {
+    var input = document.getElementById("date");
+    if (!input) return;
+    var today = new Date().toLocaleDateString("en-CA");
+    input.max = today;
+    if (!input.value) input.value = today;
+  })();
+</script>
+{% endblock %}

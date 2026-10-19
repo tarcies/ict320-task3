@@ -39,11 +39,11 @@ def generate():
 def detail(day):
     if not is_iso_date(day):
         abort(404)
-    rows = summary_service.get_summary(day)
-    if not rows:
+    summary = summary_service.get_summary(day)
+    if not summary:
         abort(404)
     return render_template(
         "summaries/detail.html",
-        summary=rows[0],
+        summary=summary,
         surveys=survey_service.get_all_surveys({"surveyDate": day}),
     )
