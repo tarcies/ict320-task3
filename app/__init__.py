@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect, url_for
+from flask import Flask, request, session, redirect, url_for, render_template
 from app.utils.errors import register_error_handlers
 from app.services import auth_service
 from app.routes import (
