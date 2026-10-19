@@ -3,11 +3,10 @@ mssql-python
 python-dotenv
 flask
 flask-login
-reportlab
 gunicorn
-pytest
-typing
 pydantic
 bcrypt
 fastapi
 jsonschema
+pytest
+mongomock
